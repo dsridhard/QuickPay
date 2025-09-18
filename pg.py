@@ -33,19 +33,19 @@ def create_payment():
 #2 Payment Page
 
 @app.route("/pay/<payment_id>",
-           method=["GET"])
+           methods=["GET"])
 def pay_page(payment_id):
     if payment_id not in payments:
         return "Invalid payment_id",404
     
     html = f"""
-           <h1>Dummy Payment Gateway</h1>
+           <h1>Payment Gateway</h1>
            <p>Amount :{payments[payment_id]}</p>
            ['amount']{payments[payment_id]['currency']}</p>
            <form action="/simulate/{payment_id}" method="post">
-           <button name="status" value="success">Simulate Success ✔ </button>
-           <button name="status" value="faliure">Simulate Failure </button>
-           <button name="status" value="pending">Simulate Pending </button>
+           <button name="status" value="success">Simulate Success ✅ </button>
+           <button name="status" value="faliure">Simulate Failure ❌ </button>
+           <button name="status" value="pending">Simulate Pending ❗ </button>
            </form>
              
              """
@@ -53,7 +53,7 @@ def pay_page(payment_id):
 
 # 3 Simulate Payment Outcome
 @app.route("/simulate/payment_id",
-           method=["POST"])
+           methods=["POST"])
 def simulate(payment_id):
     if payment_id not in payments:
         return "Invalid payment_id",404
@@ -73,7 +73,7 @@ def simulate(payment_id):
 
 # 4 check status API 
 @app.route("/status/<payment_id>",
-           method=["POST"])
+           methods=["POST"])
 def status(payment_id):
     if payment_id not in payments:
         return jsonify({"error":"Invalid payment_id"}),404
