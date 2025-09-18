@@ -10,7 +10,7 @@ payments ={}
 # Shared secret for webhook signing 
 #  (merchant must verify this)
 
-WEBHOOK_SECRET = "my_dummy_secret"
+WEBHOOK_SECRET = "quickpay_secret"
 
 
 #1 Create a payment
