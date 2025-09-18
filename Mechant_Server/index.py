@@ -14,9 +14,13 @@ ORDERS = {}
 # Step 1: Create order & call QuickPay PG
 @app.route("/book", methods=["POST"])
 def book():
-    data = request.json
-    amount = data.get("amount", 1000)
+    # Parse JSON data from the request
+    data = request.get_json()
+    if not data or "amount" not in data:
+        return jsonify({"error": "Invalid or missing 'amount' in JSON body"}), 400
 
+    # Extract the amount from the request body
+    amount = data["amount"]
     # Order ID for merchant system
     order_id = f"ORD-{len(ORDERS)+1}"
     ORDERS[order_id] = {"amount": amount, "status": "pending"}
